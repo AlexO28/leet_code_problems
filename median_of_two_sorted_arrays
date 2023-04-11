@@ -1,0 +1,41 @@
+# Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+
+import numpy as np
+
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        m = len(nums1)
+        n = len(nums2)
+        even_mode =  ((m + n) % 2 == 0)
+        number_of_skipped = np.floor((m + n) / 2)
+        count = 0
+        pos1 = 0
+        pos2 = 0
+        if m == 0:
+            return np.median(nums2)
+        if n == 0:
+            return np.median(nums1)
+        last_element = min(nums1[0], nums2[0])
+        last_element_save = last_element
+        if not even_mode:
+            number_of_skipped += 1
+        while count <= number_of_skipped:
+            count += 1
+            last_element_save = last_element
+            if pos1 == m:
+                last_element = nums2[pos2]
+                pos2 += 1
+            elif pos2 == n:
+                last_element = nums1[pos1]
+                pos1 += 1
+            elif nums1[pos1] < nums2[pos2]:
+                last_element = nums1[pos1]
+                pos1 += 1
+            else:
+                last_element = nums2[pos2]
+                pos2 += 1
+        if not even_mode:
+            return last_element_save
+        else:
+            return (last_element + last_element_save)/2
