@@ -1,0 +1,22 @@
+# Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+from collections import OrderedDict
+
+
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        arr = []
+        while head is not None:
+            arr.append(head.val)
+            head = head.next
+        dict = OrderedDict.fromkeys(arr)
+        arr = (list(dict))[::-1]
+        iter = None
+        for elem in arr:
+            iter = ListNode(elem, iter)
+        return iter
