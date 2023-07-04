@@ -1,0 +1,27 @@
+# Given an integer n, return all the structurally unique BST's (binary search trees), which has exactly n nodes of unique values from 1 to n. Return the answer in any order.
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getUniqueTrees(self, start, end):
+        trees = []
+        if start > end:
+            trees.append(None)
+            return trees
+
+        for i in range(start, end + 1):
+            left_subtrees = self.getUniqueTrees(start, i - 1)
+            right_subtrees = self.getUniqueTrees(i + 1, end)
+
+            for l in left_subtrees:
+                for r in right_subtrees:
+                    tree = TreeNode(val = i, left = l, right = r)
+                    trees.append(tree)
+        return trees
+
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        return self.getUniqueTrees(1, n)
