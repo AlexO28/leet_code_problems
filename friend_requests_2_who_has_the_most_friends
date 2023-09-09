@@ -1,0 +1,9 @@
+--Write a solution to find the people who have the most friends and the most friends number.
+
+/* Write your T-SQL query statement below */
+
+select top 1 A.id, count(A.friend_id) as num from
+((select distinct requester_id as id, accepter_id as friend_id from RequestAccepted)
+union (select distinct accepter_id as id, requester_id as friend_id from RequestAccepted)) as A
+group by A.id
+order by num desc
