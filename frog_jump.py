@@ -15,3 +15,8 @@ class Solution:
                     if dfs(stone_positions[stones[index] + next_jump], next_jump):
                         return True
             return False
+
+        stone_positions = {}
+        for j in range(len(stones)):
+            stone_positions[stones[j]] = j
+        return dfs(0, 0)
