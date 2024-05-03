@@ -12,6 +12,7 @@
  * };
  */
 #include <cstdlib>
+using namespace std;
 
 class Solution {
 public:
