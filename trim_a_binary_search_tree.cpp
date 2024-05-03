@@ -11,6 +11,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+#include <cstdlib>
+
 class Solution {
 public:
     TreeNode* trimBST(TreeNode* root, int low, int high) {
