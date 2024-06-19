@@ -3,3 +3,4 @@
 *.cpp linguist-vendored=false
 *.py linguist-vendored=false
 *.sql linguist-vendored=false
+*.java linguist-vendored=false
