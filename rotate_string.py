@@ -6,7 +6,7 @@ class Solution:
             if i == 0:
                 new_s = s
             else:
-                new_s = s[(i+1):] + s[:(i+1)]
+                new_s = s[i:] + s[:i]
             if new_s == goal:
                 return True
         return False
