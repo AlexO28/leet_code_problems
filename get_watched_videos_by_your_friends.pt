@@ -1,0 +1,32 @@
+# There are n people, each person has a unique id between 0 and n-1. Given the arrays watchedVideos and friends, where watchedVideos[i] and friends[i] contain the list of watched videos and the list of friends respectively for the person with id = i.
+# Level 1 of videos are all watched videos by your friends, level 2 of videos are all watched videos by the friends of your friends and so on. In general, the level k of videos are all watched videos by people with the shortest path exactly equal to k with you. Given your id and the level of videos, return the list of videos ordered by their frequencies (increasing). For videos with the same frequency order them alphabetically from least to greatest. 
+from typing import List
+from collections import deque, Counter
+
+
+class Solution:
+    def watchedVideosByFriends(
+        self,
+        watchedVideos: List[List[str]],
+        friends: List[List[int]],
+        id: int,
+        level: int,
+    ) -> List[str]:
+        visited = [False] * (len(friends))
+        queue = deque([id])
+        visited[id] = True
+        for i in range(level):
+            level_size = len(queue)
+            for j in range(level_size):
+                current_user = queue.popleft()
+                for friend_id in friends[current_user]:
+                    if not visited[friend_id]:
+                        queue.append(friend_id)
+                        visited[friend_id] = True
+        video_freqs = Counter()
+        while queue:
+            current_user = queue.popleft()
+            for video in watchedVideos[current_user]:
+                video_freqs[video] += 1
+        sorted_videos = sorted(video_freqs.items(), key=lambda x: (x[1], x[0]))
+        return [video[0] for video in sorted_videos]
