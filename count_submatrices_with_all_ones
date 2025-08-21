@@ -1,0 +1,27 @@
+# Given an m x n binary matrix mat, return the number of submatrices that have all ones.
+from typing import List
+from math import inf
+
+
+class Solution:
+    def numSubmat(self, mat: List[List[int]]) -> int:
+        num_mat = []
+        for i in range(len(mat)):
+            arr = []
+            for j in range(len(mat[0])):
+                if mat[i][j] == 0:
+                    arr.append(0)
+                else:
+                    if j == 0:
+                        arr.append(1)
+                    else:
+                        arr.append(arr[-1] + 1)
+            num_mat.append(arr.copy())
+        res = 0
+        for i in range(len(num_mat)):
+            for j in range(len(num_mat[0])):
+                min_val = inf
+                for k in range(i, -1, -1):
+                    min_val = min(min_val, num_mat[k][j])
+                    res += min_val
+        return res
