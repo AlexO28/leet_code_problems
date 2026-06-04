@@ -9,10 +9,8 @@ from math import comb
 class Solution:
     def waysToBuildRooms(self, prevRoom: List[int]) -> int:
         self.MOD = 1000000007
-        self.ingoing = defaultdict(set)
         self.outgoing = defaultdict(set)
         for i in range(1, len(prevRoom)):
-            self.ingoing[i].add(prevRoom[i])
             self.outgoing[prevRoom[i]].add(i)
         self.res = [1]
         self.find_ways(0)
