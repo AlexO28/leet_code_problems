@@ -2,12 +2,11 @@
 # A subsequence is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.
 # A subsequence seq is repeated k times in the string s if seq * k is a subsequence of s, where seq * k represents a string constructed by concatenating seq k times.
 # Return the longest subsequence repeated k times in string s. If multiple such subsequences are found, return the lexicographically largest one. If there is no such subsequence, return an empty string.
-from collections import Counter, deque
+from collections import deque
 
 
 class Solution:
     def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
-        cnt = Counter(s)
         cs = list(set(s))
         cs.sort()
         q = deque([""])
